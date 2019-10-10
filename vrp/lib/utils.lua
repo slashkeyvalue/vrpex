@@ -1,4 +1,4 @@
-SERVER = not IsVehicleEngineStarting
+SERVER = IsDuplicityVersion()
 CLIENT = not SERVER
 
 function table.maxn(t)
