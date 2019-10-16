@@ -394,7 +394,6 @@ AddEventHandler("syncclean",function(index)
 			if IsEntityAVehicle(v) then
 				SetVehicleDirtLevel(v,0.0)
 				SetVehicleUndriveable(v,false)
-				tvRP.DeletarObjeto()
 			end
 		end
 	end
