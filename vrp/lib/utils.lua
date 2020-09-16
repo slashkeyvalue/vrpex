@@ -133,3 +133,21 @@ function joinStrings(list, sep)
 	end
 	return str
 end
+
+do
+	if not Proxy then
+		Proxy = module("vrp", "lib/Proxy")
+	end
+	
+	if not Tunnel then
+		Tunnel = module("vrp", "lib/Tunnel")
+	end
+
+	if SERVER then
+		vRP = Proxy.getInterface("vRP")
+		vRPClient = Tunnel.getInterface("vRP")
+	else
+		vRPClient = Proxy.getInterface("vRP")
+		vRP = Tunnel.getInterface("vRP")
+	end
+end

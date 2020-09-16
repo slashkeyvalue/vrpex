@@ -2,6 +2,7 @@ local Tools = module("lib/Tools")
 
 local TriggerRemoteEvent = nil
 local RegisterLocalEvent = nil
+
 if SERVER then
 	TriggerRemoteEvent = TriggerClientEvent
 	RegisterLocalEvent = RegisterServerEvent
@@ -14,8 +15,8 @@ local Tunnel = {}
 
 Tunnel.delays = {}
 
-function Tunnel.setDestDelay(dest,delay)
-	Tunnel.delays[dest] = { delay,0 }
+function Tunnel.setDestDelay(dest, delay)
+	Tunnel.delays[dest] = {delay, 0}
 end
 
 local function tunnel_resolve(itable,key)
@@ -35,11 +36,12 @@ local function tunnel_resolve(itable,key)
 		local r = nil
 		local profile
 
-		local args = {...} 
+		local args = {...}
+		
 		local dest = nil
 		if SERVER then
 			dest = args[1]
-			args = {table.unpack(args,2,table.maxn(args))}
+			args = {table.unpack(args, 2, table.maxn(args))}
 			if dest >= 0 and not no_wait then
 				r = async()
 			end
@@ -106,9 +108,10 @@ function Tunnel.bindInterface(name,interface)
 
 		local f = interface[member]
 
-		local rets = {}
-		if type(f) == "function" then
-			rets = { f(table.unpack(args,1,table.maxn(args))) }
+		local membertype = type(f)
+
+		if membertype == "function" then
+			rets = {f(table.unpack(args, 1, table.maxn(args)))}
 		end
 
 		if rid >= 0 then
@@ -134,7 +137,9 @@ function Tunnel.getInterface(name,identifier)
 		if callback then
 			ids:free(rid)
 			callbacks[rid] = nil
-			callback(table.unpack(args,1,table.maxn(args)))
+
+			args = args or {}
+			callback(table.unpack(args, 1, table.maxn(args)))
 		end
 	end)
 	return r
