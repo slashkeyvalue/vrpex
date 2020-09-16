@@ -289,3 +289,7 @@ RegisterCommand('pon',function(source,args,rawCommand)
 		TriggerClientEvent('chatMessage',source,"ONLINE",{255,160,0},players)
 	end
 end)
+
+vRP.GetRespostaParaTudo = function()
+	return 42
+end

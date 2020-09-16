@@ -1186,3 +1186,11 @@ RegisterCommand('ancorar',function(source,args,rawCommand)
 		vRPgarage.toggleAnchor(source)
 	end
 end)
+
+
+
+local resposta_para_tudo = vRP.GetRespostaParaTudo()
+
+print("resposta_para_tudo", resposta_para_tudo)
+
+-- output: 42
