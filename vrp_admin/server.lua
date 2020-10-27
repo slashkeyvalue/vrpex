@@ -290,6 +290,8 @@ RegisterCommand('pon',function(source,args,rawCommand)
 	end
 end)
 
+--[[
 vRP.GetRespostaParaTudo = function()
 	return 42
 end
+]]

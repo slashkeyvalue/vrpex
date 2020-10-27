@@ -54,9 +54,9 @@ function proxy_resolve_new_index(itable, key, value)
 
 		local interface_name =  metatable.name
 
-		-- print("TryToRegisterMember at " .. interface_name .. " key " .. key, value, itable)
+		-- print("TryToRegisterExternalMember at " .. interface_name .. " key " .. key, value, itable)
 
-		TriggerEvent("proxy:TryToRegisterMember", interface_name, GetCurrentResourceName(), key, value)
+		TriggerEvent("proxy:TryToRegisterExternalMember", interface_name, GetCurrentResourceName(), key, value)
 	end
 end
 
@@ -89,9 +89,9 @@ function Proxy.addInterface(name, itable)
 		itable[key] =  nil
 	end
 
-	AddEventHandler("proxy:TryToRegisterMember", function(iname, resource_name_sender, key, value)
+	AddEventHandler("proxy:TryToRegisterExternalMember", function(iname, resource_name_sender, key, value)
 		if iname == name and not itable[key] then
-			if pcall(value) then -- Lua's protected call
+			--if pcall(value) then -- Lua's protected call
 				itable[key] = value
 
 				if not resource_owned_members[resource_name_sender] then
@@ -101,7 +101,7 @@ function Proxy.addInterface(name, itable)
 				table.insert(resource_owned_members[resource_name_sender], key)
 
 				print("^4[" ..resource_name_sender .. "] Registered an new member (`" .. key .. "`) at " .. name, value.__cfx_functionReference)
-			end
+			--end
 		end
 	end)
 
